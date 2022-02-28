@@ -9,3 +9,8 @@ Just a simple weather app. =)
 - Able to add multiple cities to track the weather.
 - Added cities data will store on local device.
 - A single button to clear all data.
+
+### Download the app here:
+
+Android APK:
+https://bit.ly/scottweatherapp
