@@ -80,6 +80,7 @@ class _CityWidgetState extends State<CityWidget> {
                       ),
                       Expanded(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
                               children: [
@@ -98,7 +99,10 @@ class _CityWidgetState extends State<CityWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                             ),
-                            Text(desc),
+                            Text(
+                              desc.toUpperCase(),
+                              style: kCaptionLabelStyle,
+                            ),
                           ],
                         ),
                       ),

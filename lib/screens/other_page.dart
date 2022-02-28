@@ -61,11 +61,23 @@ class _OtherPageState extends State<OtherPage> {
             isScrollControlled: true,
             builder: (context) => SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.top),
                 child: Container(
-                  height: 300,
+                  height: 200,
                   child: Center(
-                    child: buildDropDownCity(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            "Add a city:",
+                            style: kTitle1Style,
+                          ),
+                        ),
+                        buildDropDownCity(),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -95,6 +107,7 @@ class _OtherPageState extends State<OtherPage> {
                 height: 10,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text("Today", style: kLargeTitleStyle),
                   SizedBox(width: 15),
@@ -102,6 +115,23 @@ class _OtherPageState extends State<OtherPage> {
                     DateFormat('dd-MMM-yyyy').format(DateTime.now()),
                     style: kTitle1Style,
                   ),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () async {
+                        UserPreferences.deleteAll();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(seconds: 1),
+                            content: Text('All data cleared'),
+                          ),
+                        );
+                        Future.delayed(Duration(seconds: 1)).then((_) {
+                          setState(() {
+                            _citiesCard = getCitiesWidgets();
+                          });
+                        });
+                      },
+                      icon: Icon(Icons.delete_forever)),
                 ],
               ),
               ..._citiesCard,
@@ -132,7 +162,7 @@ class _OtherPageState extends State<OtherPage> {
           child: DropdownButton<String>(
             isDense: true,
             hint: const Text("Select a city"),
-            value: _selected,
+            value: "Kuala Lumpur",
             onChanged: (newValue) {
               setState(() {
                 _selected = newValue.toString();

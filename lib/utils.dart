@@ -48,4 +48,6 @@ class UserPreferences {
 
   static Future setCities(List<String> cities) async => await _preferences.setStringList(_keyCities, cities);
   static List<String> getCities() => _preferences.getStringList(_keyCities) ?? [];
+
+  static void deleteAll() => _preferences.clear();
 }
